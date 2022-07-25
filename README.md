@@ -1,4 +1,4 @@
-o # cc-i18n
+# cc-i18n
 基于cocos creator引擎的游戏开发i18n多语言模块，是在nodejs环境下运行的i18n工具，所以需要确保安装nodejs环境。
 该工具可以帮助你自动检测游戏预制体中的cc.Label组件，并生成相应的key存储在json文件中，并把相对应的key设置在I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 
