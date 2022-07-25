@@ -8,6 +8,7 @@ o # cc-i18n
     
  ## 命令行
  工具通过五个命令可以启动运行：
+
     cc-i18n create  这个命令会在项目的scripts/i18n目录下生成i18n模块代码，同时在resources/i18n生成相应目录结构
 
     cc-i18n gen-key  这个命令是根据预制体节点中挂载的cc.Label组件生成相应的key，并把key保存到一个Json文件中
