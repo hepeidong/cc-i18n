@@ -1,0 +1,32 @@
+{
+  "name": "cc-i18n",
+  "version": "1.0.0",
+  "description": "基于cocos creator引擎的游戏开发i18n多语言模块",
+  "main": "main.js",
+  "bin": {
+    "cc-i18n": "./bin/main.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "minimist": "^1.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.6"
+  },
+  "scripts": {
+    "test": "cc-i18n"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hepeidong/cc-i18n.git"
+  },
+  "keywords": [
+    "i18n"
+  ],
+  "author": "何沛东",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hepeidong/cc-i18n/issues"
+  },
+  "homepage": "https://github.com/hepeidong/cc-i18n#readme"
+}

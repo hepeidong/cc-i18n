@@ -1,0 +1,21 @@
+[
+    {
+        "__type__": "",
+        "_name": "",
+        "_objFlags": 0,
+        "node": {
+        "__id__": 0
+        },
+        "_enabled": true,
+        "__prefab": {
+            "__id__": 0
+        },
+        "_string": "",
+        "params": [],
+        "_id": ""
+    },
+    {
+        "__type__": "cc.CompPrefabInfo",
+        "fileId": ""
+    }
+]

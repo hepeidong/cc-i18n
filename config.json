@@ -1,0 +1,18 @@
+{
+    "win": {
+        "_i18n_res_dir": "assets\\resources\\",
+        "_i18n_src_dir": "assets\\",
+        "_file_prefab_path": "assets\\resources",
+        "_file_script_path": "assets\\scripts/i18n\\I18nLabel.ts.meta",
+        "_file_zh_json_path": "assets\\resources\\i18n\\text\\zh.json",
+        "_component": "cc.Label"
+    },
+    "mac": {
+        "_i18n_res_dir": "assets/resources/",
+        "_i18n_src_dir": "assets/",
+        "_file_prefab_path": "assets/resources",
+        "_file_script_path": "assets/scripts/i18n/I18nLabel.ts.meta",
+        "_file_zh_json_path": "assets/resources/i18n/text/zh.json",
+        "_component": "cc.Label"
+    }
+}
