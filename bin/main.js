@@ -3,7 +3,7 @@ const Fs = require('fs');
 const colors = require('colors');
 const minimist = require('minimist');
 const { utils } = require('../src/utils');
-const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes } = require('../src');
+const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes, createI18nConfig } = require('../src');
 const { getDirname } = require('../get -dirname');
 
 const commandStr = Fs.readFileSync(utils.rawUrl(getDirname(), 'command.json')).toString();
@@ -42,6 +42,7 @@ if (cmd) {
         utils.log('正在拷贝资源...'.warn);
         copyRes();
         copyCode();
+        createI18nConfig();
         utils.log('成功...'.success);
         utils.log('###########################################'.gray);
     }

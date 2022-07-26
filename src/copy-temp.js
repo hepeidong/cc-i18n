@@ -4,6 +4,7 @@ require('colors');
 const { utils } = require('./utils');
 
 const configObj = utils.getPathConfig();
+var _file_script_path = "";
 
 function copy(src, dest) {
     const files = utils.getFiles(src);
@@ -22,7 +23,7 @@ function copy(src, dest) {
 
                 const subStr = file.substring(0, 9);
                 if (subStr === 'I18nLabel') {
-                    utils.setI18nLabelPath(path);
+                    _file_script_path = path;
                 }
             }
         }
@@ -64,5 +65,11 @@ function copyRes() {
     }
 }
 
+function createI18nConfig() {
+    _file_script_path = _file_script_path + '.meta';
+    utils.writeI18nconfig(_file_script_path);
+}
+
 module.exports.copyCode = copyCode;
 module.exports.copyRes = copyRes;
+module.exports.createI18nConfig = createI18nConfig;

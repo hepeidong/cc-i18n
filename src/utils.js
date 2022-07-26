@@ -37,6 +37,10 @@ function generateUUID() {
 var _script_uuid = "";
 var _path_config = null;
 var _i18nLabel_path = "";
+var _i18nconfig = {
+    i18nLabel: "",
+    i18nSprite: ""
+};
 
 module.exports.utils = {
     getFiles(path) {
@@ -150,7 +154,32 @@ module.exports.utils = {
         _i18nLabel_path = path;
     },
 
+    writeI18nconfig(path) {
+        let config;
+        if (Fs.existsSync(this.cwd('i18nconfig.json'))) {
+            config = this.readI18nconfig();
+            config.i18nLabel = path;
+        }
+        else {
+            _i18nconfig.i18nLabel = path;
+            config = _i18nconfig;
+        }
+        Fs.writeFileSync(this.cwd('i18nconfig.json'), JSON.stringify(config, null, 4));
+    },
+
+    readI18nconfig() {
+        if (_i18nconfig.i18nLabel.length === 0) {
+            const configStr = Fs.readFileSync(this.cwd('i18nconfig.json')).toString();
+            _i18nconfig = JSON.parse(configStr);
+        }
+        return _i18nconfig;
+    },
+
     getI18nLabelPath() {
+        if (_i18nLabel_path.length === 0) {
+            this.readI18nconfig();
+            _i18nLabel_path = _i18nconfig.i18nLabel;
+        }
         return _i18nLabel_path;
     },
 

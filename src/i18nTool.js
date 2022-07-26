@@ -446,8 +446,8 @@ function genI18nKey() {
             if (fileData[i].__type__ === _component) {
                 const nodeId = fileData[i].node.__id__;
                 const components = fileData[nodeId]._components;
-                for (const id of components) {
-                    if (fileData[id].__type__ === getUuid()) {
+                for (const e of components) {
+                    if (fileData[e.__id__].__type__ === getUuid()) {
                         flag = true;
                         gennerateI18nKey(fileData, i, _file_zh_json_path, _component);
                         break;
