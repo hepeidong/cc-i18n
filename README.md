@@ -36,4 +36,4 @@
     同时在resources/i18n.text目录下增加与枚举同名的json文件即可
     
 ## cocos creator 版本
-  3.5.0以上
+  3.x以上
