@@ -23,7 +23,7 @@
     
 ## 功能
     对于静态文本，需要开发者自行在挂在了cc.Label组件的节点上挂在I18nLabel组件，或者可以使用cc-i18n run-gen-set-key --g自动给相应节点挂在I18nLabel组件，
-    需要注意这个命令会给所有挂在了cc.Label组件的节点自动挂在I18nLabel组件，故需要考虑是否所有label节点都是静态文本
+    需要注意这个命令会给所有挂载了cc.Label组件的节点自动挂载I18nLabel组件，故需要考虑是否所有label节点都是静态文本
     
     对于动态文本，可以通过调用 I18nManager.getInstance().getText()接口去获取相应的文本，该接口通过传入的key获取json文件中的内容，开发者可以事先在相应的json文件中增加对应的键值对。
     
