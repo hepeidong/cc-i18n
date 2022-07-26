@@ -8,7 +8,7 @@ const configObj = utils.getPathConfig();
 //项目动态资源目录
 const _file_prefab_path = configObj._file_prefab_path;
 //需要增加的组件的meta问题路径
-const _file_script_path = configObj._file_script_path;
+const _file_script_path = utils.getI18nLabelPath();
 //生成的i18n语言映射key存储json文件
 const _file_zh_json_path = configObj._file_zh_json_path;
 /**

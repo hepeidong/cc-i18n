@@ -1,4 +1,5 @@
 var Fs = require('fs');
+const { getDirname } = require('../get -dirname');
 const { compressUuid } = require('./uuid');
 require('colors');
 
@@ -35,6 +36,7 @@ function generateUUID() {
 //脚本的uuid
 var _script_uuid = "";
 var _path_config = null;
+var _i18nLabel_path = "";
 
 module.exports.utils = {
     getFiles(path) {
@@ -89,21 +91,21 @@ module.exports.utils = {
     },
 
     getPath(path) {
-        var regExp;
+        var url;
         const dirname = process.cwd();
         const platform = process.platform;
         if (platform === 'darwin') {
-            regExp = new RegExp(dirname.split('/').pop());
+            url = dirname + '/' + path
         }
         else if (platform === 'win32') {
-            regExp = new RegExp(dirname.split('\\').pop());
+            url = dirname + '\\' + path
         }
-        return dirname.replace(regExp, "") + path;
+        return url;
     },
 
     getPathConfig() {
         if (!_path_config) {
-            const configStr = Fs.readFileSync(this.cwd('config.json')).toString();
+            const configStr = Fs.readFileSync(this.rawUrl(getDirname(), 'config.json')).toString();
             const config = JSON.parse(configStr);
             const platform = process.platform;
             if (platform === 'darwin') {
@@ -142,6 +144,14 @@ module.exports.utils = {
             slash = '/';
         }
         return path + slash + filename;
+    },
+
+    setI18nLabelPath(path) {
+        _i18nLabel_path = path;
+    },
+
+    getI18nLabelPath() {
+        return _i18nLabel_path;
     },
 
     log(...args) {

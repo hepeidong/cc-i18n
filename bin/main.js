@@ -4,8 +4,9 @@ const colors = require('colors');
 const minimist = require('minimist');
 const { utils } = require('../src/utils');
 const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes } = require('../src');
+const { getDirname } = require('../get -dirname');
 
-const commandStr = Fs.readFileSync(utils.cwd('command.json')).toString();
+const commandStr = Fs.readFileSync(utils.rawUrl(getDirname(), 'command.json')).toString();
 const command = JSON.parse(commandStr);
 
 colors.setTheme({

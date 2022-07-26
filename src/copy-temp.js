@@ -1,4 +1,5 @@
 const Fs = require('fs');
+const { getDirname } = require('../get -dirname');
 require('colors');
 const { utils } = require('./utils');
 
@@ -18,6 +19,11 @@ function copy(src, dest) {
             else if (utils.isFile(srcPath)) {
                 Fs.copyFileSync(srcPath, path);
                 utils.log('拷贝文件 =>', path.path);
+
+                const subStr = file.substring(0, 9);
+                if (subStr === 'I18nLabel') {
+                    utils.setI18nLabelPath(path);
+                }
             }
         }
     }
@@ -25,18 +31,18 @@ function copy(src, dest) {
 
 function copyCode() {
     const projPath = utils.getPath(configObj._i18n_src_dir);
-    const src = utils.cwd(utils.rawUrl('template', 'code'));
+    const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'code');
     let dest = '';
-    if (Fs.existsSync(projPath + 'script')) {
+    if (Fs.existsSync(utils.rawUrl(projPath,'script'))) {
         dest = utils.rawUrl(projPath, 'script');
     }
-    else if (Fs.existsSync(projPath + 'scripts')) {
+    else if (Fs.existsSync(utils.rawUrl(projPath, 'scripts'))) {
         dest = utils.rawUrl(projPath, 'scripts');
     }
-    else if (Fs.existsSync(projPath + 'Script')) {
+    else if (Fs.existsSync(utils.rawUrl(projPath, 'Script'))) {
         dest = utils.rawUrl(projPath, 'Script');
     }
-    else if (Fs.existsSync(projPath + 'Scripts')) {
+    else if (Fs.existsSync(utils.rawUrl(projPath, 'Scripts'))) {
         dest = utils.rawUrl(projPath, 'Scripts');
     }
     else {
@@ -48,7 +54,7 @@ function copyCode() {
 
 function copyRes() {
     const projPath = utils.getPath(configObj._i18n_res_dir);
-    const src = utils.cwd(utils.rawUrl('template', 'res'));
+    const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'res');
     if (Fs.existsSync(projPath)) {
         copy(src, projPath);
     }

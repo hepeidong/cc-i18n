@@ -1,4 +1,5 @@
 var Fs = require('fs');
+const { getDirname } = require('../get -dirname');
 require('colors');
 const { setKeyForI18nLabel, saveZhFile, gennerateI18nKey, setKeyForI18n } = require('./label-key');
 const { utils } = require('./utils');
@@ -10,7 +11,7 @@ var _file_prefab_path = "";
 var _file_script_path = "";
 //生成的i18n语言映射key存储json文件
 var _file_zh_json_path = "";
-const _file_temp_path = process.cwd() + '/file-temp.txt';
+const _file_temp_path = utils.rawUrl(getDirname(), 'file-temp.txt');
 //处理的文件类型后缀
 const _file_type = 'prefab';
 /**
@@ -443,8 +444,15 @@ function genI18nKey() {
         for (let i = 0; i < fileData.length; ++i) {
             //这个是没有增加组件，直接生成key值
             if (fileData[i].__type__ === _component) {
-                flag = true;
-                gennerateI18nKey(fileData, i, _file_zh_json_path, _component);
+                const nodeId = fileData[i].node.__id__;
+                const components = fileData[nodeId]._components;
+                for (const id of components) {
+                    if (fileData[id].__type__ === getUuid()) {
+                        flag = true;
+                        gennerateI18nKey(fileData, i, _file_zh_json_path, _component);
+                        break;
+                    }
+                }
             }
         }
         if (flag) {
