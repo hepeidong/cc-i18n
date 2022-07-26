@@ -6,7 +6,7 @@
     搭建nodejs环境，并查看是否有nodejs和npm版本 node --version npm --version，如果以确定安装了相应环境，则执行下面命令进行安装：
     npm install  cc-i18n -g
     
- ## 命令行
+## 命令行
  工具通过五个命令可以启动运行：
 
     cc-i18n create  这个命令会在项目的scripts/i18n目录下生成i18n模块代码，同时在resources/i18n生成相应目录结构
@@ -21,7 +21,7 @@
     cc-i18n run-gen-set-key --g 这个命令是根据预制体节点中挂载的cc.Label组件生成相应的key，并把key保存到一个Json文件中，然后再在挂载了
     cc.Label组件的节点上增加I18nLabel组件，并把相应的key设置到组件上（这个功能在大项目中可能会存在问题）
     
-  ## 功能
+## 功能
     对于静态文本，需要开发者自行在挂在了cc.Label组件的节点上挂在I18nLabel组件，或者可以使用cc-i18n run-gen-set-key --g自动给相应节点挂在I18nLabel组件，
     需要注意这个命令会给所有挂在了cc.Label组件的节点自动挂在I18nLabel组件，故需要考虑是否所有label节点都是静态文本
     
@@ -29,10 +29,10 @@
     
 ## 如何增加语言
   可以在LanguageEnum文件中增加语言枚举，例如：
-      enum Language {
+     enum Language {
         'zh',
         'en',
-    }
+     }
     同时在resources/i18n.text目录下增加与枚举同名的json文件即可
     
 ## cocos creator 版本
