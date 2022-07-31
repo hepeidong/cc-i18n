@@ -4,7 +4,8 @@ require('colors');
 const { utils } = require('./utils');
 
 const configObj = utils.getPathConfig();
-var _file_script_path = "";
+var _file_label_script = "";
+var _file_sprite_script = "";
 
 function copy(src, dest) {
     const files = utils.getFiles(src);
@@ -21,9 +22,11 @@ function copy(src, dest) {
                 Fs.copyFileSync(srcPath, path);
                 utils.log('拷贝文件 =>', path.path);
 
-                const subStr = file.substring(0, 9);
-                if (subStr === 'I18nLabel') {
-                    _file_script_path = path;
+                if (file.substring(0, 9) === 'I18nLabel') {
+                    _file_label_script = path;
+                }
+                else if (file.substring(0, 10) === 'I18nSprite') {
+                    _file_sprite_script = path;
                 }
             }
         }
@@ -66,8 +69,9 @@ function copyRes() {
 }
 
 function createI18nConfig() {
-    _file_script_path = _file_script_path + '.meta';
-    utils.writeI18nconfig(_file_script_path);
+    _file_label_script = _file_label_script + '.meta';
+    _file_sprite_script = _file_sprite_script + '.meta';
+    utils.writeI18nconfig(_file_label_script, _file_sprite_script);
 }
 
 module.exports.copyCode = copyCode;

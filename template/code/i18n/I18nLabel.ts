@@ -22,6 +22,11 @@ const { ccclass, property, requireComponent, disallowMultiple, menu } = _decorat
 @disallowMultiple
 @menu('i18n/I18nLabel')
 export class I18nLabel extends Component implements II18nComponent {
+    @property({
+        tooltip: '是否是动态文本'
+    })
+    DTEXT: boolean = false;
+
     @property(CCString)
     private _string: string = '';
 
@@ -31,7 +36,7 @@ export class I18nLabel extends Component implements II18nComponent {
         this._string = val;
         let label    = this.getComponent(Label);
         if (isValid(label) && !EDITOR) {
-            label.string = I18nManager.getInstance().getText(this._string as string, this.params as string[]);
+            label.string = I18nManager.getInstance().getText(this._string as string, ...this.params as string[]);
         }
     }
 
@@ -39,9 +44,18 @@ export class I18nLabel extends Component implements II18nComponent {
     private params: string[] = [];
 
     start () {
-        // [3]
         I18nManager.getInstance().addLabel(this);
         this.reset();
+    }
+
+    /**
+     * 设置标签显示的内容
+     * @param key 语言json文件中的key
+     * @param params 替换{}字符串的参数
+     */
+    public setLabel(key: string, ...params: any[]) {
+        this.params = params;
+        this.string = key;
     }
 
     public reset() {

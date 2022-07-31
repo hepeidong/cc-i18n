@@ -1,20 +1,22 @@
 {
   "name": "cc-i18n",
-  "version": "1.0.15",
+  "version": "1.0.21",
   "description": "基于cocos creator引擎的游戏开发i18n多语言模块",
   "main": "main.js",
   "bin": {
     "cc-i18n": "./bin/main.js"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "colors": "^1.4.0",
+    "download-git-repo": "^3.0.2",
     "minimist": "^1.2.6"
   },
   "devDependencies": {
     "@types/node": "^18.0.6"
   },
   "scripts": {
-    "test": "cc-i18n"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

@@ -447,10 +447,14 @@ function genI18nKey() {
                 const nodeId = fileData[i].node.__id__;
                 const components = fileData[nodeId]._components;
                 for (const e of components) {
-                    if (fileData[e.__id__].__type__ === getUuid()) {
-                        flag = true;
-                        gennerateI18nKey(fileData, i, _file_zh_json_path, _component);
-                        break;
+                    const i18nLabel = fileData[e.__id__];
+                    if (i18nLabel.__type__ === getUuid()) {
+                        //不是动态文本
+                        if (!i18nLabel.DTEXT) {
+                            flag = true;
+                            gennerateI18nKey(fileData, i, _file_zh_json_path, _component);
+                            break;
+                        }
                     }
                 }
             }
@@ -459,6 +463,8 @@ function genI18nKey() {
             saveZhFile(_file_zh_json_path);
         }
     }
+
+    
 }
 
 //把key放入到相应组件里

@@ -3,8 +3,9 @@ const Fs = require('fs');
 const colors = require('colors');
 const minimist = require('minimist');
 const { utils } = require('../src/utils');
-const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes, createI18nConfig } = require('../src');
+const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes, createI18nConfig, clone } = require('../src');
 const { getDirname } = require('../get -dirname');
+
 
 const commandStr = Fs.readFileSync(utils.rawUrl(getDirname(), 'command.json')).toString();
 const command = JSON.parse(commandStr);
@@ -40,11 +41,17 @@ if (cmd) {
     if (cmd === command.create) {
         utils.log('###########################################'.gray);
         utils.log('正在拷贝资源...'.warn);
-        copyRes();
-        copyCode();
-        createI18nConfig();
-        utils.log('成功...'.success);
-        utils.log('###########################################'.gray);
+        clone().then((value) => {
+            copyRes();
+            copyCode();
+            createI18nConfig();
+            utils.log(value.success);
+            utils.log('###########################################'.gray);
+            process.exit();
+        }).catch((err) => {
+            utils.log(err);
+            process.exit();
+        });
     }
     else if (cmd === command.gen) {
         path();

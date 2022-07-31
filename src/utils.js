@@ -41,6 +41,7 @@ var _i18nconfig = {
     i18nLabel: "",
     i18nSprite: ""
 };
+const  _i18nConfigFilename = "i18n.config.json";
 
 module.exports.utils = {
     getFiles(path) {
@@ -154,22 +155,24 @@ module.exports.utils = {
         _i18nLabel_path = path;
     },
 
-    writeI18nconfig(path) {
+    writeI18nconfig(labelScriptPath, spriteScriptPath) {
         let config;
-        if (Fs.existsSync(this.cwd('i18nconfig.json'))) {
+        if (Fs.existsSync(this.cwd(_i18nConfigFilename))) {
             config = this.readI18nconfig();
-            config.i18nLabel = path;
+            config.i18nLabel = labelScriptPath;
+            config.i18nSprite = spriteScriptPath;
         }
         else {
-            _i18nconfig.i18nLabel = path;
+            _i18nconfig.i18nLabel = labelScriptPath;
+            _i18nconfig.i18nSprite = spriteScriptPath;
             config = _i18nconfig;
         }
-        Fs.writeFileSync(this.cwd('i18nconfig.json'), JSON.stringify(config, null, 4));
+        Fs.writeFileSync(this.cwd(_i18nConfigFilename), JSON.stringify(config, null, 4));
     },
 
     readI18nconfig() {
         if (_i18nconfig.i18nLabel.length === 0) {
-            const configStr = Fs.readFileSync(this.cwd('i18nconfig.json')).toString();
+            const configStr = Fs.readFileSync(this.cwd(_i18nConfigFilename)).toString();
             _i18nconfig = JSON.parse(configStr);
         }
         return _i18nconfig;

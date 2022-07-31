@@ -36,9 +36,16 @@ export class I18nSprite extends Component implements II18nComponent {
     }
 
     start () {
-        // [3]
         I18nManager.getInstance().addSprite(this);
         this.reset();
+    }
+
+    /**
+     * 设置精灵显示
+     * @param key 语言json文件中的key
+     */
+    public setSprite(key: string) {
+        this.string = key;
     }
 
     public reset() {
@@ -46,7 +53,7 @@ export class I18nSprite extends Component implements II18nComponent {
     }
 
     onDestroy() {
-        I18nManager.getInstance().removeSprite(this, this.string as string);
+        I18nManager.getInstance().removeSprite(this);
     }
 
     // update (deltaTime: number) {
