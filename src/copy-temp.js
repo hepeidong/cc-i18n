@@ -21,11 +21,11 @@ function copy(src, dest) {
             else if (utils.isFile(srcPath)) {
                 Fs.copyFileSync(srcPath, path);
                 utils.log('拷贝文件 =>', path.path);
-
-                if (file.substring(0, 9) === 'I18nLabel') {
+                const filename = file.split('.')[0];
+                if (filename === 'I18nLabel') {
                     _file_label_script = path;
                 }
-                else if (file.substring(0, 10) === 'I18nSprite') {
+                else if (filename === 'I18nSprite') {
                     _file_sprite_script = path;
                 }
             }

@@ -73,12 +73,17 @@ if (cmd) {
         process.exit();
     }
     else {
-        utils.log('无法搜索到命令: ' + cmd.error);
+        utils.log(`无法搜索到命令: ${cmd}`.error);
         process.exit();
     }
 }
+else if (argv.v || argv.version) {
+    const str = Fs.readFileSync(utils.rawUrl(getDirname(), 'package.json')).toString();
+    const obj = JSON.parse(str);
+    console.log(obj.version);
+}
 else {
-    utils.log('无法搜索到命令: ' + cmd.error);
+    utils.log(`无法搜索到命令: ${cmd}`.error);
     process.exit();
 }
 
