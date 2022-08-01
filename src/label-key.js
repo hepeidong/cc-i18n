@@ -1,4 +1,4 @@
-var Fs = require('fs');
+const Fs = require('fs');
 const { utils } = require('./utils');
 
 var _zhObj = null;

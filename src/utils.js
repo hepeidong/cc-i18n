@@ -2,6 +2,7 @@ var Fs = require('fs');
 const { getDirname } = require('../get -dirname');
 const { compressUuid } = require('./uuid');
 require('colors');
+const { join } = require('path');
 
 const hex = [ // 0-255
     "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f",
@@ -98,13 +99,14 @@ module.exports.utils = {
     getPath(path) {
         var url;
         const dirname = process.cwd();
-        const platform = process.platform;
-        if (platform === 'darwin') {
-            url = dirname + '/' + path
-        }
-        else if (platform === 'win32') {
-            url = dirname + '\\' + path
-        }
+        // const platform = process.platform;
+        url = join(dirname, path);
+        // if (platform === 'darwin') {
+        //     url = dirname + '/' + path;
+        // }
+        // else if (platform === 'win32') {
+        //     url = dirname + '\\' + path
+        // }
         return url;
     },
 
@@ -131,24 +133,26 @@ module.exports.utils = {
     cwd(filename) {
         var url = '';
         const platform = process.platform;
-        if (platform === 'darwin') {
-            url += process.cwd() + '/' + filename;
-        }
-        else if (platform === 'win32') {
-            url += process.cwd() + '\\' + filename;
-        }
+        url = join(process.cwd(), filename);
+        // if (platform === 'darwin') {
+        //     url += process.cwd() + '/' + filename;
+        // }
+        // else if (platform === 'win32') {
+        //     url += process.cwd() + '\\' + filename;
+        // }
         return url;
     },
 
     rawUrl(path, filename) {
-        let slash = '';
-        if (process.platform === 'win32') {
-            slash = '\\';
-        }
-        else if (process.platform === 'darwin') {
-            slash = '/';
-        }
-        return path + slash + filename;
+        // let slash = '';
+        // if (process.platform === 'win32') {
+        //     slash = '\\';
+        // }
+        // else if (process.platform === 'darwin') {
+        //     slash = '/';
+        // }
+        // return path + slash + filename;
+        return join(path, filename);
     },
 
     setI18nLabelPath(path) {
