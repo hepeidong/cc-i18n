@@ -6,7 +6,7 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 ## 安装
     搭建nodejs环境，并查看是否有nodejs和npm版本 node --version npm --version，如果以确定安装了相应环境，
     则执行下面命令进行安装：
-            **npm install  cc-i18n -g**
+            npm install  cc-i18n -g
     
 ## 命令行
  工具通过五个命令可以启动运行：
@@ -43,7 +43,7 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
         相应图片，把这张图片的uuid设置到I18nSprite组件上。
 
 ### cc-i18n gen-set-key:
-        这个命令会同时执行 **cc-i18n gen-key**, **cc-i18n set-key**命令。
+        这个命令会同时执行 cc-i18n gen-key, cc-i18n set-key命令。
 
 ### cc-i18n gen-set-key -g:
         这个命令是根据预制体节点中挂载的cc.Label组件生成相应的key，并把key保存到一个Json文件中，然后再在挂载了
@@ -70,13 +70,13 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
         过传入的key获取json文件中的内容，开发者可以事先在相应的json文件中增加对应的键值对，例如在zh.json文件增加 "hello": "你好"，
         则在代码中可以通过 
 
-                **node.getComponent(I18nLabel).setLabel("hello")**
+                node.getComponent(I18nLabel).setLabel("hello")
 
         获取对应语言文件的 "hello" 对应的文本内容。
 
         动态文本还支持动态替换json中设定的文本内容，例如zh.json文件中 "hello": "你好{0}"，那么使用时可以通过
 
-                **node.getComponent(I18nLabel).setLabel("hello", "i18n工具")**
+                node.getComponent(I18nLabel).setLabel("hello", "i18n工具")
 
         那么返回的字符串就是 "你好i18n工具"，接口的第二个参数除了传
         实际的文本内容，也可以传入key。除此之外还可以在I18nLabel组件上面的 params 属性增加相应的文本内容用于替换{0}，需要注意，文本
@@ -101,4 +101,4 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
   3.x以上
 
 ## 示例
-        
+
