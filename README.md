@@ -101,5 +101,5 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
   3.x以上
 
 ## 使用说明
-https://mp.csdn.net/mp_blog/creation/editor/126219095
 
+https://blog.csdn.net/UchihaMadara_2022/article/details/126219095?spm=1001.2014.3001.5502
