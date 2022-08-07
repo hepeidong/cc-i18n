@@ -2,5 +2,5 @@
     "create": "create",
     "gen": "gen-key",
     "set": "set-key",
-    "run": "run-gen-set-key"
+    "run": "gen-set-key"
 }

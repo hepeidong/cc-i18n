@@ -34,7 +34,7 @@ function copy(src, dest) {
 }
 
 function copyCode() {
-    const projPath = utils.getPath(configObj._i18n_src_dir);
+    const projPath = utils.cwd(configObj._i18n_src_dir);
     const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'code');
     let dest = '';
     if (Fs.existsSync(utils.rawUrl(projPath,'script'))) {
@@ -57,7 +57,7 @@ function copyCode() {
 }
 
 function copyRes() {
-    const projPath = utils.getPath(configObj._i18n_res_dir);
+    const projPath = utils.cwd(configObj._i18n_res_dir);
     const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'res');
     if (Fs.existsSync(projPath)) {
         copy(src, projPath);

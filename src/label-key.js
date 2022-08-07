@@ -1,43 +1,13 @@
 const Fs = require('fs');
+const { ParseI18nKey } = require('./ParseI18nKey');
 const { utils } = require('./utils');
 
-var _zhObj = null;
+const parseI18nKey = new ParseI18nKey();
 
 
-function getZhObj(zhFilePath) {
-    if (!_zhObj) {
-        if (Fs.existsSync(zhFilePath)) {
-            zhFile = Fs.readFileSync(zhFilePath);
-            _zhObj  = JSON.parse(zhFile.toString());
-        }
-        else {
-            _zhObj = {};
-        }
-    }
-    return _zhObj;
-}
-
-function getPrefabEle(fileData, componentPlace) {
-    const prefabEle = fileData[componentPlace];
-    if (!prefabEle) {
-        console.error('传入的componentPlace是非法的');
-        return null;
-    }
-    return prefabEle
-}
-
-function getNodeEle(fileData, componentPlace) {
-    const prefabEle = getPrefabEle(fileData, componentPlace);
-    if (prefabEle) {
-        const id = prefabEle.node.__id__;
-        const nodeEle = fileData[id];
-        return nodeEle;
-    }
-    return null;
-}
 
 function getLabelKey(fileData, componentPlace) {
-    const nodeEle = getNodeEle(fileData, componentPlace);
+    const nodeEle = parseI18nKey.getNodeEle(fileData, componentPlace);
     if (nodeEle) {
         const keys = [nodeEle._name];
         let p = nodeEle._parent;
@@ -52,7 +22,7 @@ function getLabelKey(fileData, componentPlace) {
 }
 
 function getLabelKey1(fileData, componentPlace) {
-    const nodeEle = getNodeEle(fileData, componentPlace);
+    const nodeEle = parseI18nKey.getNodeEle(fileData, componentPlace);
     if (nodeEle) {
         const keys = [];
 
@@ -72,7 +42,7 @@ function getLabelKey1(fileData, componentPlace) {
 }
 
 function getLabelString(fileData, componentPlace, component) {
-    const nodeEle = getNodeEle(fileData, componentPlace);
+    const nodeEle = parseI18nKey.getNodeEle(fileData, componentPlace);
     if (nodeEle) {
         const components = nodeEle._components;
         for (const ele of components) {
@@ -109,7 +79,7 @@ function juageSpaceChar(str) {
 
 function juageI18nKey(key) {
     if (typeof key === 'string') {
-        const flag = key in _zhObj;
+        const flag = key in parseI18nKey.zhObj;
         if (!juageSpaceChar(key)) {
             return flag;
         }
@@ -123,12 +93,12 @@ function juageI18nKey(key) {
  * @param {any[]} fileData 预制体文本数据
  * @param {Number} componentPlace 增加的组件在文本中的位置
  * @param {String} zhFilePath 放文字的json文件路径
- * @param {String} component 根据存在的这个组件增加其他脚本组件，在这里是cc.Label
+ * @param {String} component 根据存在的这个组件增加I18nLabel脚本组件，在这里是cc.Label
  * @returns 
  */
-function setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component) {
-    const zhObj = getZhObj(zhFilePath);
-    const prefabEle = getPrefabEle(fileData, componentPlace);
+function setKeyAndAddI18nLabel(fileData, componentPlace, zhFilePath, component) {
+    const zhObj = parseI18nKey.getZhObj(zhFilePath);
+    const prefabEle = parseI18nKey.getPrefabEle(fileData, componentPlace);
     if (prefabEle && juageI18nKey(prefabEle._string)) {
         const labelString = getLabelString(fileData, componentPlace, component);
         if (labelString !== 'label' && labelString.length > 0 && !juageSpaceChar(labelString)) {
@@ -143,7 +113,7 @@ function setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component) {
 }
 
 function gennerateI18nKey(fileData, componentPlace, zhFilePath, component) {
-    const zhObj = getZhObj(zhFilePath);
+    const zhObj = parseI18nKey.getZhObj(zhFilePath);
     const labelEle = fileData[componentPlace];
     if (labelEle.__type__ === component) {
         const labelString = labelEle._string;
@@ -157,9 +127,9 @@ function gennerateI18nKey(fileData, componentPlace, zhFilePath, component) {
     }
 }
 
-function setKeyForI18n(fileData, componentPlace, zhFilePath, component) {
-    const zhObj = getZhObj(zhFilePath);
-    const prefabEle = getPrefabEle(fileData, componentPlace);
+function setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component) {
+    const zhObj = parseI18nKey.getZhObj(zhFilePath);
+    const prefabEle = parseI18nKey.getPrefabEle(fileData, componentPlace);
     if (prefabEle && juageI18nKey(prefabEle._string)) {
         const labelString = getLabelString(fileData, componentPlace, component);
         if (labelString !== 'label' && labelString.length > 0 && !juageSpaceChar(labelString)) {
@@ -172,45 +142,20 @@ function setKeyForI18n(fileData, componentPlace, zhFilePath, component) {
 }
 
 function saveZhFile(zhFilePath) {
-    const keys = Object.keys(_zhObj);
-    let zhStr = JSON.stringify(_zhObj);
-    let resultStr = '';
-    const insertPlace = [];
-    for (let i = 0; i < keys.length; ++i) {
-        let index = zhStr.indexOf('"' + keys[i]);
-        if (index > -1) {
-            insertPlace.push(index);
-        }
-    }
-
-    for (let k = 0; k < zhStr.length; ++k) {
-        if (insertPlace.indexOf(k) === -1) {
-            if (k === zhStr.length - 1) {
-                resultStr += '\n}';
-            }
-            else {
-                resultStr += zhStr[k];
-            }
-        }
-        else {
-            resultStr += '\n\t' + zhStr[k];
-        }
-    }
-
-    Fs.writeFileSync(zhFilePath, resultStr);
+    parseI18nKey.saveZhFile(zhFilePath);
 }
 
 module.exports = {
-    setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component) {
-        setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component);
+    setKeyAndAddI18nLabel(fileData, componentPlace, zhFilePath, component) {
+        setKeyAndAddI18nLabel(fileData, componentPlace, zhFilePath, component);
     },
 
     gennerateI18nKey(fileData, componentPlace, zhFilePath, component) {
         gennerateI18nKey(fileData, componentPlace, zhFilePath, component);
     },
 
-    setKeyForI18n(fileData, componentPlace, zhFilePath, component) {
-        setKeyForI18n(fileData, componentPlace, zhFilePath, component);
+    setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component) {
+        setKeyForI18nLabel(fileData, componentPlace, zhFilePath, component);
     },
 
     saveZhFile(zhFilePath) {

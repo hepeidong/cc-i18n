@@ -10,24 +10,23 @@ const configObj = utils.getPathConfig();
 const _file_prefab_path = configObj._file_prefab_path;
 //生成的i18n语言映射key存储json文件
 const _file_zh_json_path = configObj._file_zh_json_path;
-// const _file_zh_json_pic_path = configObj._file_zh_json_pic_path;
-/**
- * 如果是删除组件，则会删除这里设定的类型组件
- * 如果是增加组件，会以这个组件条件，当节点存在这个组件，则增加相应的脚本组件
- */
- const _component = configObj._component;
+const _file_zh_json_pic_path = configObj._file_zh_json_pic_path;
+
 
 
 function path() {
     utils.log('正在初始化文件路径...');
-    const path1 = utils.getPath(_file_prefab_path);
+    const path1 = utils.cwd(_file_prefab_path);
     const path2 = utils.getI18nLabelPath();
-    const path3 = utils.getPath(_file_zh_json_path);
-    // const path4 = utils.getPath(_file_zh_json_pic_path);
-    initPath(path1, path2, path3, _component);
-    utils.log('资源目录 =>', path1.path);
-    utils.log('meta文件 =>', path2.path);
-    utils.log('json文件 =>', path3.path);
+    const path3 = utils.cwd(_file_zh_json_path);
+    const path4 = utils.getI18nSpritePath();
+    const path5 = utils.cwd(_file_zh_json_pic_path);
+    initPath(path1, path2, path3, path4, path5, 'cc.Label', 'cc.Sprite');
+    utils.log('资源目录               =>', path1.path);
+    utils.log('I18nLabel脚本meta文件  =>', path2.path);
+    utils.log('label的json文件        =>', path3.path);
+    utils.log('I18nSprite脚本meta文件 =>', path4.path);
+    utils.log('sprite的json文件       =>', path5.path);
     utils.log('####################################################\n'.gray);
 }
 

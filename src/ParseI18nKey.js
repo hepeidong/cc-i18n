@@ -20,6 +20,15 @@ ParseI18nKey.prototype.getZhObj = function(zhFilePath) {
     return this.zhObj;
 }
 
+ParseI18nKey.prototype.contain = function(obj, value) {
+    for (const key in obj) {
+        if (obj[key] === value) {
+            return key;
+        }
+    }
+    return '';
+}
+
 ParseI18nKey.prototype.getPrefabEle = function(fileData, componentPlace) {
     const prefabEle = fileData[componentPlace];
     if (!prefabEle) {
@@ -30,7 +39,7 @@ ParseI18nKey.prototype.getPrefabEle = function(fileData, componentPlace) {
 }
 
 ParseI18nKey.prototype.getNodeEle = function(fileData, componentPlace) {
-    const prefabEle = getPrefabEle(fileData, componentPlace);
+    const prefabEle = this.getPrefabEle(fileData, componentPlace);
     if (prefabEle) {
         const id = prefabEle.node.__id__;
         const nodeEle = fileData[id];
@@ -40,7 +49,7 @@ ParseI18nKey.prototype.getNodeEle = function(fileData, componentPlace) {
 }
 
 ParseI18nKey.prototype.genI18nKey = function(fileData, componentPlace) {
-    const nodeEle = getNodeEle(fileData, componentPlace);
+    const nodeEle = this.getNodeEle(fileData, componentPlace);
     if (nodeEle) {
         const keys = [];
 

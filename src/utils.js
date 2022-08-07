@@ -35,9 +35,11 @@ function generateUUID() {
 }
 
 //脚本的uuid
-var _script_uuid = "";
+var _label_script_uuid = "";
+var _sprite_script_uuid = "";
 var _path_config = null;
 var _i18nLabel_path = "";
+var _i18nSprite_path = "";
 var _i18nconfig = {
     i18nLabel: "",
     i18nSprite: ""
@@ -96,20 +98,6 @@ module.exports.utils = {
         return generateUUID();
     },
 
-    getPath(path) {
-        var url;
-        const dirname = process.cwd();
-        // const platform = process.platform;
-        url = join(dirname, path);
-        // if (platform === 'darwin') {
-        //     url = dirname + '/' + path;
-        // }
-        // else if (platform === 'win32') {
-        //     url = dirname + '\\' + path
-        // }
-        return url;
-    },
-
     getPathConfig() {
         if (!_path_config) {
             const configStr = Fs.readFileSync(this.rawUrl(getDirname(), 'config.json')).toString();
@@ -130,28 +118,13 @@ module.exports.utils = {
         return _path_config;
     },
 
-    cwd(filename) {
+    cwd(path) {
         var url = '';
-        const platform = process.platform;
-        url = join(process.cwd(), filename);
-        // if (platform === 'darwin') {
-        //     url += process.cwd() + '/' + filename;
-        // }
-        // else if (platform === 'win32') {
-        //     url += process.cwd() + '\\' + filename;
-        // }
+        url = join(process.cwd(), path);
         return url;
     },
 
     rawUrl(path, filename) {
-        // let slash = '';
-        // if (process.platform === 'win32') {
-        //     slash = '\\';
-        // }
-        // else if (process.platform === 'darwin') {
-        //     slash = '/';
-        // }
-        // return path + slash + filename;
         return join(path, filename);
     },
 
@@ -190,17 +163,34 @@ module.exports.utils = {
         return _i18nLabel_path;
     },
 
+    getI18nSpritePath() {
+        if (_i18nSprite_path.length === 0) {
+            this.readI18nconfig();
+            _i18nSprite_path = _i18nconfig.i18nSprite;
+        }
+        return _i18nSprite_path;
+    },
+
     log(...args) {
         console.log('[' + 'i18nTool'.cyan + ']', ...args);
     },
 
-    uuid(filePath) {
-        if (_script_uuid.length === 0) {
+    i18nLabelUuid(filePath) {
+        if (_label_script_uuid.length === 0) {
             const fileData = Fs.readFileSync(filePath);
             const data     = JSON.parse(fileData.toString());
-            _script_uuid   = compressUuid(data.uuid, false);
+            _label_script_uuid   = compressUuid(data.uuid, false);
         }
-        return _script_uuid;
+        return _label_script_uuid;
+    },
+
+    i18nSpriteUuid(filePath) {
+        if (_sprite_script_uuid.length === 0) {
+            const fileData = Fs.readFileSync(filePath);
+            const data     = JSON.parse(fileData.toString());
+            _sprite_script_uuid   = compressUuid(data.uuid, false);
+        }
+        return _sprite_script_uuid;
     },
 
     getFileId() {
