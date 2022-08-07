@@ -61,7 +61,7 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 
 ### 静态文本
         对于静态文本，需要开发者自行在挂在了cc.Label组件的节点上挂在I18nLabel组件，或者可以使用
-        cc-i18n run-gen-set-key -g 自动给相应节点挂在I18nLabel组件，需要注意这个命令会给所有挂载了cc.Label组件
+        cc-i18n gen-set-key -g 自动给相应节点挂在I18nLabel组件，需要注意这个命令会给所有挂载了cc.Label组件
         的节点自动挂载I18nLabel组件，故需要考虑是否所有label节点都是静态文本。
     
 ### 动态文本
@@ -100,5 +100,6 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 ## cocos creator 版本
   3.x以上
 
-## 示例
+## 使用说明
+https://mp.csdn.net/mp_blog/creation/editor/126219095
 
