@@ -19,7 +19,7 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 #### label多语言：
         这个命令是根据预制体Label节点中挂载的I18nLabel组件生成相应的key，并把key保存到一个Json文件中;
         注意：每一个需要自动生成多语言key的label节点，都需要手动挂载I8nLabel组件，如果想自动挂载，请使用
-        cc-i18n run-gen-set-key --g 这个命令，但这个命令会在所有label节点上挂载I18nLabel组件，故使用前
+        cc-i18n gen-set-key --g 这个命令，但这个命令会在所有label节点上挂载I18nLabel组件，故使用前
         需要考虑清楚是不是所有label节点都是静态文本。
 
 #### sprite多语言：
