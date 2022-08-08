@@ -1,34 +1,40 @@
-# cc-i18n
+# 简介
 基于cocos creator引擎的游戏开发i18n多语言模块，是在nodejs环境下运行的i18n工具，所以需要确保安装nodejs环境。
 该工具可以帮助你自动检测游戏预制体中的cc.Label组件，并生成相应的key存储在json文件中，并把相对应的key设置在
 I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 
-## 安装
-    搭建nodejs环境，并查看是否有nodejs和npm版本 node --version npm --version，如果以确定安装了相应环境，
-    则执行下面命令进行安装：
-            npm install  cc-i18n -g
+## 介绍
+> + 安装
+> + 命令行
+> + 功能使用
+> + 版本
+
+### 安装
+> 搭建nodejs环境，并查看是否有nodejs和npm版本 node --version npm --version，如果以确定安装了相应环境，
+> 则执行下面命令进行安装：
+> *npm install  cc-i18n -g*
     
-## 命令行
- 工具通过五个命令可以启动运行：
+### 命令行
+ > **工具通过五个命令可以启动运行：**
 
-### cc-i18n create:
-        这个命令会在项目的scripts/i18n目录下生成i18n模块代码，同时在resources/i18n生成相应目录结构
+> + cc-i18n create:
+> > 这个命令会在项目的scripts/i18n目录下生成i18n模块代码，同时在resources/i18n生成相应目录结构
 
-### cc-i18n gen-key:
+> + cc-i18n gen-key:
 
-#### label多语言：
-        这个命令是根据预制体Label节点中挂载的I18nLabel组件生成相应的key，并把key保存到一个Json文件中;
-        注意：每一个需要自动生成多语言key的label节点，都需要手动挂载I8nLabel组件，如果想自动挂载，请使用
-        cc-i18n gen-set-key --g 这个命令，但这个命令会在所有label节点上挂载I18nLabel组件，故使用前
-        需要考虑清楚是不是所有label节点都是静态文本。
+> > + label多语言：
+> > > 这个命令是根据预制体Label节点中挂载的I18nLabel组件生成相应的key，并把key保存到一个Json文件中;
+> > > 注意：每一个需要自动生成多语言key的label节点，都需要手动挂载I8nLabel组件，如果想自动挂载，请使用
+> > > cc-i18n gen-set-key --g 这个命令，但这个命令会在所有label节点上挂载I18nLabel组件，故使用前
+> > > 需要考虑清楚是不是所有label节点都是静态文本。
 
-#### sprite多语言：
-        对于sprite多语言来说，会检测assets/resources/i18n/sprite目录下的所有图片资源，并获取图片资源的uuid，
-        把uuid存储在json文件中。在使用时，必须先在i18n/sprite/路径下根据不同的语言增加相应的目录，比如，如果
-        你只发布中文和英语两种语言，那么就在i18n/sprite路径下建zh和en两个文件夹，在这两个文件夹下各自语言的图片，
-        必须要确保同一种图片，在不同语言文件夹下的图片文件名相同。
+> > + sprite多语言：
+> > > 对于sprite多语言来说，会检测assets/resources/i18n/sprite目录下的所有图片资源，并获取图片资源的uuid，
+> > > 把uuid存储在json文件中。在使用时，必须先在i18n/sprite/路径下根据不同的语言增加相应的目录，比如，如果
+> > > 你只发布中文和英语两种语言，那么就在i18n/sprite路径下建zh和en两个文件夹，在这两个文件夹下各自语言的图片，
+> > > 必须要确保同一种图片，在不同语言文件夹下的图片文件名相同。
 
-        注意：i18n/sprite/json路径下的文件内容不得更改，除非你完全了解更改后会产生什么后果
+> > > **注意：i18n/sprite/json路径下的文件内容不得更改，除非你完全了解更改后会产生什么后果**
         
 
 ### cc-i18n set-key:
