@@ -69,16 +69,19 @@ I18nLabel组件中，同时也支持自动给预制体增加I18nLabel组件
 > > + 静态文本
 > > > 在项目根目录运行 ***cc-i18n gen-set-key*** 可以生成并设置多语言key
 > > + 动态文本
-> > > 可以使用下面方法设置动态文本
-        *node.getComponent(I18nLabel).setLabel("hello")*
+> > > 可以使用下面方法设置动态文本：
+
+    node.getComponent(I18nLabel).setLabel("hello")
         
         
 ### 如何增加语言
 > 可以在LanguageEnum文件中增加语言枚举，例如：
-        enum Language {
-            'zh',
-            'en',
-        }
+
+    enum Language {
+        'zh',
+        'en',
+    }
+    
 > 同时在resources/i18n.text目录下增加与枚举同名的目录，再在这个目录下增加枚举同名的json文件即可
     
 ### 如何使用标签多语言
