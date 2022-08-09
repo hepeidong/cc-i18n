@@ -49,7 +49,7 @@ if (cmd) {
             utils.log('###########################################'.gray);
             process.exit();
         }).catch((err) => {
-            utils.log(err);
+            utils.log('克隆模板代码失败：', err);
             process.exit();
         });
     }

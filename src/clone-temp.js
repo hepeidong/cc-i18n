@@ -1,3 +1,4 @@
+const Fs = require('fs');
 const download = require('download-git-repo');
 const path = require('path');
 const { getDirname } = require('../get -dirname');
@@ -5,7 +6,11 @@ const { getDirname } = require('../get -dirname');
 
 function clone() {
     return new Promise((resolve, reject) => {
-        download('github:hepeidong/i18n', path.join(getDirname(), '/template'), function (err) {
+        const url = path.join(getDirname(), '/template');
+        if (!Fs.existsSync(url)) {
+            Fs.mkdirSync(url);
+        }
+        download('github:hepeidong/i18n', url, function (err) {
             if (err) {
                 reject(err);
                 return;
