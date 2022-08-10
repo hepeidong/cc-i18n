@@ -100,7 +100,7 @@ module.exports.utils = {
 
     getPathConfig() {
         if (!_path_config) {
-            const configStr = Fs.readFileSync(this.rawUrl(getDirname(), 'config.json')).toString();
+            const configStr = Fs.readFileSync(this.nodeCwd('config.json')).toString();
             const config = JSON.parse(configStr);
             const platform = process.platform;
             if (platform === 'darwin') {
@@ -126,6 +126,14 @@ module.exports.utils = {
 
     rawUrl(path, filename) {
         return join(path, filename);
+    },
+
+    nodeCwd(path) {
+        return join(getDirname(), path);
+    },
+
+    templateUrl() {
+        return this.cwd('i18n_template');
     },
 
     setI18nLabelPath(path) {

@@ -1,12 +1,12 @@
 const Fs = require('fs');
 const download = require('download-git-repo');
 const path = require('path');
-const { getDirname } = require('../get -dirname');
+const { utils } = require('./utils');
 
 
 function clone() {
     return new Promise((resolve, reject) => {
-        const url = path.join(getDirname(), '/template');
+        const url = utils.templateUrl();
         if (!Fs.existsSync(url)) {
             Fs.mkdirSync(url);
         }

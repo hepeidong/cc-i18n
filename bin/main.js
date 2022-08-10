@@ -3,11 +3,10 @@ const Fs = require('fs');
 const colors = require('colors');
 const minimist = require('minimist');
 const { utils } = require('../src/utils');
-const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, copyCode, copyRes, createI18nConfig, clone } = require('../src');
-const { getDirname } = require('../get -dirname');
+const { genKey, path, setKey, run_gen_set_key_g, run_gen_set_key, createI18nConfig, clone, copyTemp } = require('../src');
 
 
-const commandStr = Fs.readFileSync(utils.rawUrl(getDirname(), 'command.json')).toString();
+const commandStr = Fs.readFileSync(utils.nodeCwd('command.json')).toString();
 const command = JSON.parse(commandStr);
 
 colors.setTheme({
@@ -42,8 +41,7 @@ if (cmd) {
         utils.log('###########################################'.gray);
         utils.log('正在拷贝资源...'.warn);
         clone().then((value) => {
-            copyRes();
-            copyCode();
+            copyTemp();
             createI18nConfig();
             utils.log(value.success);
             utils.log('###########################################'.gray);
@@ -78,7 +76,7 @@ if (cmd) {
     }
 }
 else if (argv.v || argv.version) {
-    const str = Fs.readFileSync(utils.rawUrl(getDirname(), 'package.json')).toString();
+    const str = Fs.readFileSync(utils.nodeCwd('package.json')).toString();
     const obj = JSON.parse(str);
     console.log(obj.version);
 }

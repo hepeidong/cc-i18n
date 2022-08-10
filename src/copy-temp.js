@@ -1,5 +1,4 @@
 const Fs = require('fs');
-const { getDirname } = require('../get -dirname');
 require('colors');
 const { utils } = require('./utils');
 
@@ -35,7 +34,7 @@ function copy(src, dest) {
 
 function copyCode() {
     const projPath = utils.cwd(configObj._i18n_src_dir);
-    const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'code');
+    const src = utils.rawUrl(utils.templateUrl(), 'code');
     let dest = '';
     if (Fs.existsSync(utils.rawUrl(projPath,'script'))) {
         dest = utils.rawUrl(projPath, 'script');
@@ -58,7 +57,7 @@ function copyCode() {
 
 function copyRes() {
     const projPath = utils.cwd(configObj._i18n_res_dir);
-    const src = utils.rawUrl(utils.rawUrl(getDirname(), 'template'), 'res');
+    const src = utils.rawUrl(utils.templateUrl(), 'res');
     if (Fs.existsSync(projPath)) {
         copy(src, projPath);
     }
@@ -68,12 +67,32 @@ function copyRes() {
     }
 }
 
+function rmdirSync(path) {
+    const files = utils.getFiles(path);
+    for (const file of files) {
+        const filePath = utils.rawUrl(path, file);
+        if (utils.isFile(filePath)) {
+            Fs.rmSync(filePath);
+        }
+        else if (utils.isDir(filePath)) {
+            rmdirSync(filePath);
+        }
+    }
+    Fs.rmdirSync(path);
+}
+
+function copyTemp() {
+    copyRes();
+    copyCode();
+    rmdirSync(utils.templateUrl());
+}
+
+
 function createI18nConfig() {
     _file_label_script = _file_label_script + '.meta';
     _file_sprite_script = _file_sprite_script + '.meta';
     utils.writeI18nconfig(_file_label_script, _file_sprite_script);
 }
 
-module.exports.copyCode = copyCode;
-module.exports.copyRes = copyRes;
+module.exports.copyTemp = copyTemp;
 module.exports.createI18nConfig = createI18nConfig;

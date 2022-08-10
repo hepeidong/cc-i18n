@@ -1,10 +1,9 @@
 var Fs = require('fs');
-const { getDirname } = require("../get -dirname");
 const { utils } = require("./utils");
 require('colors');
 
 var _script_uuid = "";
-const _file_temp_path = utils.rawUrl(getDirname(), 'file-temp.txt');
+const _file_temp_path = utils.nodeCwd('file-temp.txt');
 
 function changeNodeId(nodeData, changeEleIndex) {
     const node = nodeData.node;

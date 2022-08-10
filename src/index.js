@@ -1,6 +1,6 @@
 const Fs = require('fs');
 const { clone } = require('./clone-temp');
-const { copyCode, copyRes, createI18nConfig } = require('./copy-temp');
+const { createI18nConfig, copyTemp } = require('./copy-temp');
 require('colors');
 const { genI18nKey, setI18nKey, i18nTool, initPath } = require('./i18nTool');
 const { utils } = require('./utils');
@@ -61,7 +61,6 @@ module.exports.genKey = genKey;
 module.exports.setKey = setKey;
 module.exports.run_gen_set_key = run_gen_set_key;
 module.exports.run_gen_set_key_g = run_gen_set_key_g;
-module.exports.copyCode = copyCode;
-module.exports.copyRes = copyRes;
+module.exports.copyTemp = copyTemp;
 module.exports.createI18nConfig = createI18nConfig;
 module.exports.clone = clone;
